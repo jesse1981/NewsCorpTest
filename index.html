@@ -5,8 +5,13 @@
 		<script type="text/javascript" src="main.js"></script>
 	</head>
 	<body>
+		<form action="upload.php" enctype="multipart/form-data" method="post">
+			<label>Fridge Contents</label><input type="file" name="fridge-upload" />
+			<input type="submit" value="Upload">
+		</form>
 		<div id="recipe-finder">
 		
 		</div>
+		<button onClick="search();">Search!</button>
 	</body>
 </html>
