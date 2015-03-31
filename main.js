@@ -14,7 +14,9 @@ function search() {
 			for (var b in recipes[a].ingredients) {
 				// cycle fridge
 				for (var c in fridgeItems) {					
-					var itemProps = fridgeItems[c].split(",");
+					var itemProps	= fridgeItems[c]
+					if (itemProps == undefined) alert("Undefined!");
+					itemProps		= itemProps.split(",");
 					if (itemProps.length) {
 						var itemDate  = itemProps[3];
 							itemDate  = itemDate.split("/");
@@ -22,13 +24,14 @@ function search() {
 						itemDate	  = new Date(parseInt(itemDate[2]),(parseInt(itemDate[1])-1),parseInt(itemDate[0]));
 						var dateNow	  = new Date();
 						if (
-							(recipes[a].ingredients[b].item		!=	itemProps[0]) ||
-							(recipes[a].ingredients[b].amount 	>	itemProps[1]) ||
-							(recipes[a].ingredients[b].unit 	!=	itemProps[2]) ||
-							(dateItem							<	dateNow)
+							(recipes[a].ingredients[b].item					!=	itemProps[0]) ||
+							(parseInt(recipes[a].ingredients[b].amount) 	>	parseInt(itemProps[1])) ||
+							(recipes[a].ingredients[b].unit 				!=	itemProps[2]) ||
+							(itemDate										<	dateNow)
 						){
 							allIngredientsMatch = false;
 						}
+						else break;
 					}
 				}
 				// if all ingredients match, we can use this item.
@@ -56,7 +59,7 @@ function fetchCSV(fn) {
 			fn(myRequest.responseText);
 		}
 	}
-	myRequest.open("GET", "http://newscorp.logisofttech.com.au/fridge.csv", false);
+	myRequest.open("GET", "http://newscorp.logisofttech.com.au/upload/fridge.csv", false);
 	myRequest.setRequestHeader('Content-Type', 'text/html');
 	myRequest.send();
 }

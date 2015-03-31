@@ -1,0 +1,17 @@
+label, input {
+	float: left;
+}
+label {
+	width: 150px;
+	clear: left;
+}
+button,input[type="submit"] {
+	clear: left;
+	float: left;
+}
+#recipe-finder {
+	float: left;
+	clear: left;
+	padding: 5px;
+	box-shadow: 2px 3px 2px #ccc;
+}
