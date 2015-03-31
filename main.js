@@ -11,6 +11,7 @@ function search() {
 		for (var a in recipes) {
 			var allIngredientsMatch = true;
 			// cycle ingredients
+			var ingredientCount = 0;
 			for (var b in recipes[a].ingredients) {
 				// cycle fridge
 				for (var c in fridgeItems) {					
@@ -24,18 +25,17 @@ function search() {
 						itemDate	  = new Date(parseInt(itemDate[2]),(parseInt(itemDate[1])-1),parseInt(itemDate[0]));
 						var dateNow	  = new Date();
 						if (
-							(recipes[a].ingredients[b].item					!=	itemProps[0]) ||
-							(parseInt(recipes[a].ingredients[b].amount) 	>	parseInt(itemProps[1])) ||
-							(recipes[a].ingredients[b].unit 				!=	itemProps[2]) ||
-							(itemDate										<	dateNow)
+							(recipes[a].ingredients[b].item					==	itemProps[0]) &&
+							(parseInt(recipes[a].ingredients[b].amount) 	<=	parseInt(itemProps[1])) &&
+							(recipes[a].ingredients[b].unit 				==	itemProps[2]) &&
+							(itemDate										>	dateNow)
 						){
-							allIngredientsMatch = false;
+							ingredientCount++;
 						}
-						else break;
 					}
 				}
 				// if all ingredients match, we can use this item.
-				if (allIngredientsMatch) {
+				if (ingredientCount==recipes[a].ingredients.length) {
 					var liObj = document.createElement('li');
 					liObj.innerHTML = recipes[a].name
 					ulObj.appendChild(liObj);
